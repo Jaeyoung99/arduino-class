@@ -1,76 +1,130 @@
-//I define all the pins at the top of my code so our code is all the same
 
-byte red0=2;
-byte yellow0=3;
-byte green0=4;
+//this int means red. It needs to be a different number than yellor or blue
+const int red=0;
+//this int means yellow
+const int yellow=1;
+//this int means blue
+const int blue=2;
+//this int meens grean
+const int green=3;
 
-byte red1=5;
-byte yellow1=6;
-byte green1=7;
+
+//this int is the shortcut for the highway
+const int highway=0;
+//this int is the shortcut for the road
+const int road=1;
+
+//this int sets a light on or high
+const int on=HIGH;
+//this int sets a light low or off
+const int off=LOW;
+
+//these are states
 
 
-byte button=8;
+//this stores the current color of the light on the highway
+int highway_color=red;
+//this sotres the current color of the light on the roard
+int road_color=red;
 
-bool photo_sensor=0;
 
-//this code makes me blink in one line
-void blink(byte name){
+//this controls who's turn it is, the highway or the side road
+int whos_turn=highway;
 
-  //print analog read value
-  Serial.println("Current analog value is:");
-  Serial.println(analogRead(photo_sensor));
+//this records the state of the button to see if it is pressed
+int button_state=0;
 
-  //print analog button value
-  Serial.println("Current button value is:");
-  Serial.println(digitalRead(button));
 
-  //turn on
-  digitalWrite(name,HIGH);
+//this is the pin for the green light on the highway
+int highway_green=2;
 
-  //wait
-  delay(1000);
+//this is the pin for the yellow light on the highway
+int highway_yellow=3;
+//this is the pin for the red light on the highway
+int highway_red=4;
 
-  //turn off
-  digitalWrite(name,LOW);
 
-  //wait
-  delay(1000);
-  
+//this is the pin for the green light on the road
+int road_green=5;
+//this is the pin for the yellow light on the road
+int road_yellow=6;
+//this is the pin for the red light on the road
+int road_red=7;
+
+
+
+//this is the pin for the blue light on the road
+int road_blue=8;
+//this is the pin for the blue light on the highway
+int highway_blue=9;
+
+
+//car on side road button
+int car_side_road_button=0;
+//This records if the emergency vehicle button is pressed
+int cop_button=0;
+//this records if the loss of power button is pressed
+int power_loss_button=8;
+
+int car_sensor=0;
+
+
+
+//this int records time
+int time_seconds=0;
+int time=0;
+
+
+//this int is one second
+const int one_second=1000;
+//this int is a half second
+const int half_second=500;
+
+//this is the time for a yellow light
+const int yellow_time=half_second;
+//this is green time for highway
+const int green_time_highway=one_second*10;
+const int green_time_road_minimum=one_second*3;
+const int green_time_road_maximum=one_second*6;
+
+
+void setup(){
+//we are going to set all the light sto be output
+
+
+//we are going to set all the buttons to be input
+pinMode(highway_red,OUTPUT);
+pinMode(highway_yellow,OUTPUT);
+pinMode(highway_green,OUTPUT);
+pinMode(highway_blue,OUTPUT);
+pinMode(road_red,OUTPUT);
+pinMode(road_yellow,OUTPUT);
+pinMode(road_green,OUTPUT);
+pinMode(road_blue,OUTPUT);
+
+//we set the buttons to input buttons
+pinMode(cop_button,INPUT);
+pinMode(power_loss_button,INPUT);
+pinMode(car_side_road_button,INPUT);
+
+//analog sensors do not need to be set
+
 }
 
-void setup() {
+void loop(){
+digitalWrite(highway_red,HIGH);
+digitalWrite(highway_yellow,HIGH);
+digitalWrite(highway_green,HIGH);
+digitalWrite(road_red,HIGH);
+digitalWrite(road_green,HIGH);
+digitalWrite(road_yellow,HIGH);
 
-  //set all lights for output
-  pinMode(red0,OUTPUT);
-  pinMode(green0,OUTPUT);
-  pinMode(yellow0,OUTPUT);
-  pinMode(red1,OUTPUT);
-  pinMode(green1,OUTPUT);
-  pinMode(yellow1,OUTPUT);
-
-  //set button to read
-  pinMode(button,INPUT);
-
-  //analog pin does not need to be set to read
-
-  //Set serial monitor so I can read photoresistor
-  Serial.begin(9600);
-     
-
+serial.println("button");
+Serial.println(digitalRead(power_loss_button));
+Serial.println("analog");
+Serial.println(analogRead(0));
+delay(2);
 
 }
-
-void loop() {
   
 
-  //blink one side
-  blink(red0);
-  blink(yellow0);
-  blink(green0);
-
-  //blink others side
-  blink(red1);
-  blink(yellow1);
-  blink(green1);
-  
-}
