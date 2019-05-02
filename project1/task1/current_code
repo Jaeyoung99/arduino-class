@@ -60,11 +60,13 @@ int highway_blue=9;
 
 
 //car on side road button
-int car_side_road_button;
+int car_side_road_button=0;
 //This records if the emergency vehicle button is pressed
 int cop_button=0;
 //this records if the loss of power button is pressed
-int power_loss_button=1;
+int power_loss_button=8;
+
+int car_sensor=0;
 
 
 
@@ -371,34 +373,20 @@ const int green_time_road_maximum=one_second*6;
 ///this function controls the order of operations of the code
 int normal_mode(){
   if(!digitalRead(cop_button) && !digitalRead(power_loss_button)){
-      if(whos_turn==highway && highway_color==green){
-        for(start at 0; time>=10 || !digitalRead(cop_button) || !digitalRead(power_loss_button)){
+      if(){
+        while((!analogRead(car_sensor) > 700) && !digialRead(power_loss_button))){
           wait(1);
+        
         }
-        cycle();
-        time=0;
-      }
-      else if(turn==highway && highway_color==yellow){
-        for(start at 0; time>=half_second || !digitalRead(cop_button) || !digitalRead(power_loss_button)){
-          delay(half_second);
+        if((!analogRead(car_sensor) > 700)){
+            cycle();
+            wait(1);
+            cycle();
+            wait(3*2);
+            
+          
         }
-        cycle();
-        time=0;
-      }
-      else if(turn==road && road_color==green){
-        for(start at 0; time>=10 || !digitalRead(cop_button) || !digitalRead(power_loss_button)){
-          wait(1);
-        }
-        cycle();
-        time=0;
-      }
-        else if(turn==road && highway_color==green){
-        for(; time>=half_second || !digitalRead(cop_button) || !digitalRead(power_loss_button)){
-          wait(1);
-        }
-        cycle();
-        time=0;
-      }
+      
   }
   return 0;
 }
