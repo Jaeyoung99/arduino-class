@@ -114,16 +114,21 @@ pinMode(car_side_road_button,INPUT);
 
 void loop(){
 
-    while((!analogRead(car_sensor) > 600) && !digitalRead(power_loss_button)){
-          wait(1);
-    }
-        if((!analogRead(car_sensor) > 700)){
-            cycle();
-            wait(1);
-            cycle();
-            wait(3*2);
+    if((!analogRead(car_sensor) > 700)){
+      //change to yellow
+      cycle();
+      //wait 1 half second
+      wait(1);
+      //change to red, change road to green
+      cycle();
+      //wait 6 half seconds
+      wait(3*2);
             
-        }
+      }
+      else if( !digitalRead(power_loss_button)){
+        power_loss();
+        
+      }
 
 }
   
