@@ -106,6 +106,20 @@ int light_digitalWrite(int which_side,int  which_color,int state){
     
     
   }
+  
+   else if(which_side==highway){
+    if(which_color==red){
+      digitalWrite(highway_red, state);
+      digitalWrite(highway_blue, state);
+      
+    }
+    else if(which_color==green){
+      digitalWrite(highway_green, state);
+    }
+    else if(which_color==yellow){
+      digitalWrite(highway_yellow, state);
+    }
+   }
 
   return 0;
 }
@@ -136,22 +150,18 @@ int switch_light_one_side(int side, int color){
     light_digitalWrite(side,green,off);
   }
 
+  if(side==road){
+
+         road_color=color;
+     
+  }
+  else if(side==highway){
+    highway_color=color;
+  }
+
   return 0;
 
-   else if(which_side==highway){
-    if(which_color==red){
-      digitalWrite(highway_red, state);
-      digitalWrite(highway_blue, state);
-      
-    }
-    else if(which_color==green){
-      digitalWrite(highway_green, state);
-    }
-    else if(which_color==yellow){
-      digitalWrite(highway_yellow, state);
-    }
  
-  }
   
 }
 
