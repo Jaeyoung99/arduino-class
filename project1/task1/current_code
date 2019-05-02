@@ -234,7 +234,7 @@ int cycle(){
   }
   else if(whos_turn==road){
     if(road_color==red){
-      switch_light(road,red);
+      switch_light(road,green);
     }
     else if(road_color==yellow){
       switch_light(road,red);
@@ -368,9 +368,7 @@ pinMode(car_side_road_button,INPUT);
 
 
 void loop(){
-  cycle();
-  delay(2000);
-/*
+  
     if((!analogRead(car_sensor) > 700)){
       //change to yellow
       cycle();
@@ -389,7 +387,7 @@ void loop(){
         power_loss();
         
       }
-      */
+     
 
 }
   
