@@ -327,7 +327,7 @@ int wait(int time){
 }
 //this functiond defines what to do during power loss
 int power_loss(){
-  while(!digtitalRead(power_loss_button)){
+  while(!digitalRead(power_loss_button)){
   wait(1 * 2);
   switch_light(highway,off);
   wait(1 * 2);
@@ -346,7 +346,7 @@ int cop(){
   wait(500 * 2);
   switch_light(highway,red);
   time=0;
-  while(!digital_read(cop_button)){
+  while(!digitalRead(cop_button)){
   }
   whos_turn=highway;
   return 0;
@@ -371,7 +371,7 @@ const int green_time_road_maximum=one_second*6;
 ///this function controls the order of operations of the code
 int normal_mode(){
   if(!digitalRead(cop_button) && !digitalRead(power_loss_button)){
-      if(turn==highway && highway_color==green){
+      if(whos_turn==highway && highway_color==green){
         for(start at 0; time>=10 || !digitalRead(cop_button) || !digitalRead(power_loss_button)){
           wait(1);
         }
@@ -393,7 +393,7 @@ int normal_mode(){
         time=0;
       }
         else if(turn==road && highway_color==green){
-        for(start at 0; time>=half_second || !digitalRead(cop_button) || !digitalRead(power_loss_button)){
+        for(; time>=half_second || !digitalRead(cop_button) || !digitalRead(power_loss_button)){
           wait(1);
         }
         cycle();
