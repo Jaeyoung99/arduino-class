@@ -119,7 +119,7 @@ digitalWrite(road_red,HIGH);
 digitalWrite(road_green,HIGH);
 digitalWrite(road_yellow,HIGH);
 
-serial.println("button");
+Serial.println("button");
 Serial.println(digitalRead(power_loss_button));
 Serial.println("analog");
 Serial.println(analogRead(0));
