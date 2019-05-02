@@ -108,6 +108,7 @@ pinMode(power_loss_button,INPUT);
 pinMode(car_side_road_button,INPUT);
 
 //analog sensors do not need to be set
+Serial.begin(9600);
 
 }
 
