@@ -123,8 +123,10 @@ void loop(){
       cycle();
       //wait 6 half seconds
       wait(3*2);
-            
+      for(int time=0; (time<7 * half_seconds) || analogRead(car_sensor)<=700; time+=half_second){
+      wait(1);
       }
+      cycle();
       else if( !digitalRead(power_loss_button)){
         power_loss();
         
