@@ -114,18 +114,17 @@ pinMode(car_side_road_button,INPUT);
 
 void loop(){
 
-  if(!digitalRead(power_loss_button)){
-    //if someone presses the power loss button use the power loss function
-    power_loss();
-  }
-  //if the cop button is pressed enter the emergency vehicle mode
-  if(!digitalRead(cop_button)){
-    cop();
-  }
-  else{
-    //or else do normal mode
-    normal_mode();
-  }
+    while((!analogRead(car_sensor) > 600) && !digitalRead(power_loss_button)){
+          wait(1);
+    }
+        if((!analogRead(car_sensor) > 700)){
+            cycle();
+            wait(1);
+            cycle();
+            wait(3*2);
+            
+        }
+
 }
   
 
@@ -371,23 +370,3 @@ const int green_time_road_maximum=one_second*6;
 
 */
 ///this function controls the order of operations of the code
-int normal_mode(){
-  if(!digitalRead(cop_button) && !digitalRead(power_loss_button)){
-      if(){
-        while((!analogRead(car_sensor) > 700) && !digialRead(power_loss_button))){
-          wait(1);
-        
-        }
-        if((!analogRead(car_sensor) > 700)){
-            cycle();
-            wait(1);
-            cycle();
-            wait(3*2);
-            
-          
-        }
-      
-  }
-  return 0;
-}
-  
