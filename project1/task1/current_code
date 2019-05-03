@@ -23,7 +23,7 @@ const int off=LOW;
 
 
 //this stores the current color of the light on the highway
-int highway_color=red;
+int highway_color=green;
 //this sotres the current color of the light on the roard
 int road_color=red;
 
@@ -363,31 +363,55 @@ pinMode(power_loss_button,INPUT);
 pinMode(car_side_road_button,INPUT);
 
 //analog sensors do not need to be set
+Serial.begin(9600);
+cycle();
+cycle();
+cycle();
+cycle();
+cycle();
+cycle();
 
 }
 
 
 void loop(){
-  
-    if((!analogRead(car_sensor) > 700)){
+ // cycle();
+ // delay(2000);
+  Serial.println("road color");
+  Serial.println(road_color);
+  Serial.println("highway color");
+  Serial.println(highway_color);
+  Serial.println("whos turn");
+  Serial.println(whos_turn);
+
+    if(analogRead(car_sensor) > 700){
       //change to yellow
       cycle();
+      delay(1000);
       //wait 1 half second
       wait(1);
       //change to red, change road to green
       cycle();
+      cycle();
       //wait 6 half seconds
       wait(3*2);
-      for(int time=0; (time<7 * half_second) || analogRead(car_sensor)<=700; time+=half_second){
-      wait(1);
+      for(int timee=0; ((timee < 7) && (analogRead(car_sensor) > 700)) ; timee++){
+        Serial.println("hello");
+      delay(1000);
       }
+      cycle();
+      wait(2);
+      cycle();
+      wait(1);
       cycle();
     }
       else if( !digitalRead(power_loss_button)){
         power_loss();
         
+        
       }
-     
-
+      
+      
 }
+    
   
